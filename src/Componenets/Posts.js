@@ -4,8 +4,10 @@ import Comments from "./Comments";
 import "./Posts.css";
 const Posts = (props) => {
   const [information, setInformation] = useState("");
+  const [comments, setComments] = useState([]);
   const [index, setIndex] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
+  const [isLoading2, setIsLoading2] = useState(true);
   const postInformation = (index) => {
     setIsLoading(true);
     fetch(`https://jsonplaceholder.typicode.com/posts/${index + 1}`)
@@ -19,8 +21,22 @@ const Posts = (props) => {
       });
   };
 
+  const postComments = (index) => {
+    setIsLoading2(true);
+    fetch(`https://jsonplaceholder.typicode.com/comments?postId=${index + 1}`)
+      .then((res) => {
+        setIsLoading2(false);
+        return res.json();
+      })
+      .then((res) => {
+        console.log(res);
+        setComments(res);
+      });
+  };
+
   useEffect(() => {
     postInformation(index);
+    postComments(index);
   }, [index]);
 
   return (
@@ -37,7 +53,7 @@ const Posts = (props) => {
             <div className="div-btn">
               <button
                 onClick={() => {
-                  setIndex(index);
+                  setIndex(post.id);
                 }}
               >
                 More Information
@@ -54,8 +70,8 @@ const Posts = (props) => {
         />
         <Comments
           className="main-content-right-bottom"
-          isLoading={isLoading}
-          information={information}
+          isLoading2={isLoading2}
+          comments={comments}
         />
       </div>
     </div>

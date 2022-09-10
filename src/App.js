@@ -1,7 +1,7 @@
 import Posts from "./Componenets/Posts";
 import { useEffect, useState } from "react";
 const App = () => {
-  const [counter, setCounter] = useState(1);
+  // const [counter, setCounter] = useState(1);
   const [data, setData] = useState([]);
   const fetchAPI = () => {
     fetch(`https://jsonplaceholder.typicode.com/posts`)
@@ -15,7 +15,7 @@ const App = () => {
 
   useEffect(() => {
     fetchAPI();
-  }, [counter]);
+  }, []);
 
   return (
     <div>

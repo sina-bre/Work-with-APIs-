@@ -1,14 +1,11 @@
 const PostDetails = (props) => {
-  const information = () => {
+  const Information = () => {
     return (
       <div>
         <div>
           <h3>
             User ID: {props.information.userId} , ID: {props.information.id}
           </h3>
-        </div>
-        <div>
-          <h3></h3>
         </div>
         <div>
           <h3>Title: {props.information.title}</h3>
@@ -23,7 +20,7 @@ const PostDetails = (props) => {
   return (
     <div className={props.className}>
       <h1>PostDetails</h1>
-      {props.isLoading ? <h1>Loading...</h1> : information()}
+      {props.isLoading ? <h1>Loading...</h1> : <Information />}
     </div>
   );
 };
